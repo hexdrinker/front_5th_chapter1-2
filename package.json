@@ -6,6 +6,7 @@
     "node": ">=22",
     "pnpm": ">=10"
   },
+  "homepage": "https://hexdrinker.github.io/front_5th_chapter1-2",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -23,7 +24,9 @@
     "test:e2e:report": "npx playwright show-report",
     "test:generate": "playwright codegen localhost:5173",
     "prepare": "husky",
-    "deploy": "pnpm run build && gh-pages -d dist"
+    "build:test": "vite build --mode development",
+    "build:prod": "vite build --mode production",
+    "deploy": "pnpm run build:prod && gh-pages -d dist"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

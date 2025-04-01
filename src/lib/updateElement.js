@@ -75,7 +75,6 @@ function diffAttributes(element, newProps, oldProps) {
     ...Object.keys(newProps),
     ...Object.keys(oldProps),
   ]);
-  console.log(allProps);
   allProps.delete("children");
 
   for (const name of allProps) {
