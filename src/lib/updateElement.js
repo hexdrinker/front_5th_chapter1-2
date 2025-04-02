@@ -1,4 +1,4 @@
-import { cleanupElementEvents, removeEvent } from "./eventManager";
+import { cleanupElementEvents, removeEvent, addEvent } from "./eventManager";
 import { createElement } from "./createElement";
 
 /*
@@ -102,7 +102,12 @@ function diffAttributes(element, newProps, oldProps) {
     // 속성 업데이트
     if (name.startsWith("on")) {
       const eventType = name.toLowerCase().substring(2);
-      removeEvent(element, eventType, newValue);
+      if (oldValue) {
+        removeEvent(element, eventType, oldValue);
+      }
+      if (newValue) {
+        addEvent(element, eventType, newValue);
+      }
     } else if (name === "style") {
       // 스타일 객체
       if (typeof newValue === "object") {
