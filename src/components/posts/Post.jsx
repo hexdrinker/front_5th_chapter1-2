@@ -11,14 +11,15 @@ export const Post = ({
   likeUsers,
   activationLike = false,
 }) => {
-  const { loggedIn, currentUser } = globalStore.getState();
+  const { loggedIn } = globalStore.getState();
   const { likePost } = globalStore.actions;
+
   const handleClickLike = () => {
     if (!loggedIn) {
       alert("로그인 후 이용해주세요");
       return;
     }
-    likePost(id, currentUser.username);
+    likePost(id);
   };
 
   return (

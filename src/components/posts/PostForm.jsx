@@ -3,13 +3,13 @@ import { createVNode } from "../../lib";
 import { globalStore } from "../../stores";
 
 export const PostForm = () => {
-  const { currentUser } = globalStore.getState();
   const { addPost } = globalStore.actions;
 
   const handleSubmitPost = (e) => {
     e.preventDefault();
     const content = document.querySelector("#post-content").value;
-    addPost({ author: currentUser.username, content });
+    addPost({ content });
+    document.querySelector("#post-content").value = "";
   };
 
   return (
