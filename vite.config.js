@@ -2,6 +2,24 @@ import { defineConfig as defineTestConfig, mergeConfig } from "vitest/config";
 import { defineConfig } from "vite";
 import { resolve } from "path";
 
+function autoImportCreateVNode() {
+  const importCode = `import { createVNode } from "@/lib";\n`;
+  return {
+    name: "auto-import-create-vnode",
+    enforce: "pre",
+    transform(code, id) {
+      if (id.includes("test.jsx")) return null;
+      if (!id.endsWith(".jsx")) return null;
+      if (code.includes("import { createVNode }")) return null;
+
+      return {
+        code: importCode + code,
+        map: null,
+      };
+    },
+  };
+}
+
 export default mergeConfig(
   defineConfig({
     base: "./",
@@ -14,6 +32,12 @@ export default mergeConfig(
         jsxFactory: "createVNode",
       },
     },
+    resolve: {
+      alias: {
+        "@": resolve(__dirname, "src"),
+      },
+    },
+    plugins: [autoImportCreateVNode()],
     build: {
       rollupOptions: {
         input: {

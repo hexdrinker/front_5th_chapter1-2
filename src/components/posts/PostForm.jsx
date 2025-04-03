@@ -1,5 +1,3 @@
-/** @jsx createVNode */
-import { createVNode } from "../../lib";
 import { globalStore } from "../../stores";
 
 export const PostForm = () => {
